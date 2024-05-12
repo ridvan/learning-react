@@ -81,13 +81,16 @@ export default function App() {
 
   useEffect(
     function () {
+      const controller = new AbortController();
+
       async function fetchMovies() {
         try {
           setIsLoading(true);
           setError("");
 
           const response = await fetch(
-            `http://www.omdbapi.com/?apikey=${OMDB_API_KEY}&s=${query}`
+            `http://www.omdbapi.com/?apikey=${OMDB_API_KEY}&s=${query}`,
+            { signal: controller.signal }
           );
 
           if (!response.ok) {
@@ -101,10 +104,12 @@ export default function App() {
           }
 
           setMovies(data.Search);
-          setIsLoading(false);
+          setError("");
         } catch (error) {
           console.error(error.message);
-          setError(error.message);
+          if (!error.name === "AbortError") {
+            setError(error.message);
+          }
         } finally {
           setIsLoading(false);
         }
@@ -117,6 +122,10 @@ export default function App() {
       }
 
       fetchMovies();
+
+      return function () {
+        controller.abort();
+      };
     },
     [query]
   );
@@ -311,6 +320,18 @@ function MovieDetails({
     [selectedId]
   );
 
+  useEffect(
+    function () {
+      if (!title) return;
+      document.title = `Movie | ${title}`;
+
+      return function () {
+        document.title = "usePopcorn";
+      };
+    },
+    [title]
+  );
+
   return (
     <div className="details">
       {isLoading ? (
@@ -343,9 +364,6 @@ function MovieDetails({
                     maxRating={10}
                     size={25}
                     onSetRating={setUserRating}
-                    defaultRating={
-                      isWatchedData ? isWatchedData.userRating : ""
-                    }
                   />
                   {userRating > 0 && (
                     <button className="btn-add" onClick={handleAdd}>
