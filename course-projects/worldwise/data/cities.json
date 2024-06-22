@@ -35,6 +35,102 @@
         "lng": 13.376933665713324
       },
       "id": 98443197
+    },
+    {
+      "cityName": "Torre de Juan Abad",
+      "country": "Spain",
+      "emoji": "🇪🇸",
+      "date": "2024-06-20T21:00:22.226Z",
+      "notes": "werwerwer",
+      "position": {
+        "lat": "38.70265930723801",
+        "lng": "-3.2299804687500004"
+      },
+      "id": 98443198
+    },
+    {
+      "cityName": "Braganca",
+      "country": "Portugal",
+      "emoji": "🇵🇹",
+      "date": "2024-06-20T21:49:36.240Z",
+      "notes": "",
+      "position": {
+        "lat": "41.68932225997044",
+        "lng": "-6.833496093750001"
+      },
+      "id": 98443199
+    },
+    {
+      "cityName": "El Allia",
+      "country": "Algeria",
+      "emoji": "🇩🇿",
+      "date": "2024-06-20T21:49:52.148Z",
+      "notes": "",
+      "position": {
+        "lat": "33.063924198120645",
+        "lng": "5.273437500000001"
+      },
+      "id": 98443200
+    },
+    {
+      "cityName": "El Bnoud",
+      "country": "Algeria",
+      "emoji": "🇩🇿",
+      "date": "2024-06-20T21:53:00.379Z",
+      "notes": "",
+      "position": {
+        "lat": "31.39115752282472",
+        "lng": "-0.087890625"
+      },
+      "id": 98443201
+    },
+    {
+      "cityName": "El Bnoud",
+      "country": "Algeria",
+      "emoji": "🇩🇿",
+      "date": "2024-06-20T21:53:00.379Z",
+      "notes": "",
+      "position": {
+        "lat": "31.39115752282472",
+        "lng": "-0.087890625"
+      },
+      "id": 98443202
+    },
+    {
+      "cityName": "Al Jawf",
+      "country": "Libya",
+      "emoji": "🇱🇾",
+      "date": "2024-06-20T21:53:04.896Z",
+      "notes": "",
+      "position": {
+        "lat": "26.194876675795218",
+        "lng": "24.78515625"
+      },
+      "id": 98443203
+    },
+    {
+      "cityName": "Giza",
+      "country": "Egypt",
+      "emoji": "🇪🇬",
+      "date": "2024-06-20T21:53:26.765Z",
+      "notes": "",
+      "position": {
+        "lat": "29.267232865200903",
+        "lng": "29.707031250000004"
+      },
+      "id": 98443204
+    },
+    {
+      "cityName": "Pinarbasi",
+      "country": "Turkiye",
+      "emoji": "🇹🇷",
+      "date": "2024-06-20T21:54:42.483Z",
+      "notes": "",
+      "position": {
+        "lat": "39.027718840211605",
+        "lng": "36.65039062500001"
+      },
+      "id": 98443205
     }
   ]
 }
