@@ -1,20 +1,23 @@
-function Options({ question, dispatch, answer }) {
+import { useQuiz } from "../contexts/QuizContext";
+
+function Options() {
+  const { questions, index, answer, dispatch } = useQuiz();
   const hasAnswered = answer !== null;
 
   return (
     <div className="options">
-      {question.options.map((option, index) => (
+      {questions[index].options.map((option, selected) => (
         <button
-          className={`btn btn-option${answer === index ? " answer" : ""}
+          className={`btn btn-option${answer === selected ? " answer" : ""}
           ${
             hasAnswered
-              ? index === question.correctOption
+              ? selected === questions[index].correctOption
                 ? " correct"
                 : " wrong"
               : ""
           }`}
           disabled={hasAnswered}
-          onClick={() => dispatch({ type: "newAnswer", payload: index })}
+          onClick={() => dispatch({ type: "newAnswer", payload: selected })}
           key={option}
         >
           {option}
