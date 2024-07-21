@@ -28,6 +28,17 @@ function Calculator({ workouts, allowSound }) {
     [duration, allowSound]
   );
 
+  useEffect(
+    function () {
+      // If 'duration' and 'sets' are not in the dependency array, their value will
+      // remain as the old/initial value on re-renders even if they change.
+      // "Stale Closures"
+      // console.log(duration, sets);
+      document.title = `Your ${number}-exercise workout plan`;
+    },
+    [number]
+  );
+
   // const duration = (number * sets * speed) / 60 + (sets - 1) * durationBreak;
   const mins = Math.floor(duration);
   const seconds = (duration - mins) * 60;
