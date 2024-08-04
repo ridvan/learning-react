@@ -19,9 +19,9 @@ const accountSlice = createSlice({
       state.balance -= action.payload;
     },
     requestLoan: {
-      prepare(amount, purpose) {
+      prepare(amount, loanPurpose) {
         return {
-          payload: { amount, purpose },
+          payload: { amount, loanPurpose },
         };
       },
       reducer(state, action) {
