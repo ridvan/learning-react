@@ -48,8 +48,6 @@ const variations = {
   `,
 };
 
-console.log(sizes, variations);
-
 const Button = styled.button`
   border: none;
   border-radius: var(--border-radius-sm);

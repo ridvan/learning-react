@@ -28,18 +28,11 @@ const TableHeader = styled.header`
   padding: 1.6rem 2.4rem;
 `;
 
-console.log(Table, TableHeader);
-
 function CabinTable() {
-  const {
-    isLoading,
-    data: cabins,
-    error,
-  } = useQuery({
+  const { isLoading, data: cabins } = useQuery({
     queryKey: ["cabins"],
     queryFn: getCabins,
   });
-  console.log(cabins, error);
   if (isLoading) return <Spinner />;
 
   return (
