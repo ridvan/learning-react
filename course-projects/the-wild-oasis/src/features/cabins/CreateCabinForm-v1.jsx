@@ -8,7 +8,7 @@ import Textarea from "../../ui/Textarea";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { createCabin } from "../../services/apiCabins";
 import toast from "react-hot-toast";
-import FormRow from "../../ui/FormROw";
+import FormRow from "../../ui/FormRow";
 
 function CreateCabinForm() {
   const queryClient = useQueryClient();
