@@ -3,6 +3,7 @@ import styled from "styled-components";
 import PropTypes from "prop-types";
 import { createPortal } from "react-dom";
 import { cloneElement, createContext, useContext, useState } from "react";
+import { useClickOutside } from "../hooks/useClickOutside";
 
 const StyledModal = styled.div`
   position: fixed;
@@ -76,6 +77,9 @@ function Open({ children, opens: opensWindowName }) {
 
 function Window({ children, name }) {
   const { openName, close } = useContext(ModalContext);
+
+  const ref = useClickOutside(close);
+
   if (name !== openName) return null;
 
   // via React DOM
@@ -83,7 +87,7 @@ function Window({ children, name }) {
   // useful for elements like modals or tooltips.
   return createPortal(
     <Overlay>
-      <StyledModal>
+      <StyledModal ref={ref}>
         <Button onClick={close}>
           <HiXMark />
         </Button>
