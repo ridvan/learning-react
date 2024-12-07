@@ -2,6 +2,7 @@ import { HiXMark } from "react-icons/hi2";
 import styled from "styled-components";
 import PropTypes from "prop-types";
 import { createPortal } from "react-dom";
+import { cloneElement, createContext, useContext, useState } from "react";
 
 const StyledModal = styled.div`
   position: fixed;
@@ -52,25 +53,58 @@ const Button = styled.button`
   }
 `;
 
-function Modal({ children, onClose }) {
+const ModalContext = createContext();
+
+function Modal({ children }) {
+  const [openName, setOpenName] = useState("");
+
+  const close = () => setOpenName("");
+  const open = setOpenName;
+
+  return (
+    <ModalContext.Provider value={{ openName, close, open }}>
+      {children}
+    </ModalContext.Provider>
+  );
+}
+
+function Open({ children, opens: opensWindowName }) {
+  const { open } = useContext(ModalContext);
+
+  return cloneElement(children, { onClick: () => open(opensWindowName) });
+}
+
+function Window({ children, name }) {
+  const { openName, close } = useContext(ModalContext);
+  if (name !== openName) return null;
+
   // via React DOM
   // allows you to render a component outside its parent DOM hierarchy,
   // useful for elements like modals or tooltips.
   return createPortal(
     <Overlay>
       <StyledModal>
-        <Button onClick={onClose}>
+        <Button onClick={close}>
           <HiXMark />
         </Button>
-        <div>{children}</div>
+        {/* `cloneElement` lets you create a new React element using another element as a starting point. */}
+        <div>{cloneElement(children, { onCloseModal: close })}</div>
       </StyledModal>
     </Overlay>,
     document.body
   );
 }
+
 Modal.propTypes = {
   children: PropTypes.node.isRequired,
-  onClose: PropTypes.func.isRequired,
 };
+
+Window.propTypes = {
+  children: PropTypes.node.isRequired,
+  name: PropTypes.string.isRequired,
+};
+
+Modal.Open = Open;
+Modal.Window = Window;
 
 export default Modal;
