@@ -1,4 +1,6 @@
+import { createContext, useContext } from "react";
 import styled from "styled-components";
+import PropTypes from "prop-types";
 
 const StyledTable = styled.div`
   border: 1px solid var(--color-grey-200);
@@ -36,6 +38,7 @@ const StyledRow = styled(CommonRow)`
   }
 `;
 
+// eslint-disable-next-line no-unused-vars
 const StyledBody = styled.section`
   margin: 0.4rem 0;
 `;
@@ -52,9 +55,60 @@ const Footer = styled.footer`
   }
 `;
 
+// eslint-disable-next-line no-unused-vars
 const Empty = styled.p`
   font-size: 1.6rem;
   font-weight: 500;
   text-align: center;
   margin: 2.4rem;
 `;
+
+const TableContext = createContext();
+
+function Table({ columns, children }) {
+  return (
+    <TableContext.Provider value={{ columns }}>
+      <StyledTable role="table">{children}</StyledTable>
+    </TableContext.Provider>
+  );
+}
+
+function Header({ children }) {
+  const { columns } = useContext(TableContext);
+  return (
+    <StyledHeader role="row" columns={columns} as="header">
+      {children}
+    </StyledHeader>
+  );
+}
+
+function Row({ children }) {
+  const { columns } = useContext(TableContext);
+  return (
+    <StyledRow role="row" columns={columns}>
+      {children}
+    </StyledRow>
+  );
+}
+
+function Body({ children }) {}
+
+Table.Header = Header;
+Table.Row = Row;
+Table.Body = Body;
+Table.Footer = Footer;
+
+Table.propTypes = {
+  columns: PropTypes.string.isRequired,
+  children: PropTypes.node.isRequired,
+};
+
+Header.propTypes = {
+  children: PropTypes.node.isRequired,
+};
+
+Row.propTypes = {
+  children: PropTypes.node.isRequired,
+};
+
+export default Table;
