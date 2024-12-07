@@ -91,7 +91,17 @@ function Row({ children }) {
   );
 }
 
-function Body({ children }) {}
+function Body({ data, render }) {
+  if (!data.length) {
+    return <Empty>No data to show</Empty>;
+  }
+  return <StyledBody>{data.map(render)}</StyledBody>;
+}
+
+Body.propTypes = {
+  data: PropTypes.array.isRequired,
+  render: PropTypes.func.isRequired,
+};
 
 Table.Header = Header;
 Table.Row = Row;
