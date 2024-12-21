@@ -43,6 +43,7 @@ function Filter({ filterField, options }) {
 
   function handleClick(value) {
     searchParams.set(filterField, value);
+    searchParams.set("page", 1);
     setSearchParams(searchParams);
   }
 
@@ -52,7 +53,7 @@ function Filter({ filterField, options }) {
         <FilterButton
           onClick={() => handleClick(option.value)}
           key={option.value}
-          active={currentFilter === option.value}
+          active={currentFilter === option.value ? "true" : ""}
           disabled={currentFilter === option.value}
         >
           {option.label}
