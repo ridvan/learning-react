@@ -12,7 +12,7 @@ export function useLogin() {
     onSuccess: (user) => {
       toast.success(`Welcome back, ${user.user.email}`);
       // Set the user in the cache
-      queryClient.setQueriesData(["user"], user);
+      queryClient.setQueryData(["user"], user.user);
       navigate("/dashboard", { replace: true });
     },
     onError(err) {
