@@ -5,6 +5,7 @@ const { renderToString } = require("react-dom/server");
 const React = require("react");
 
 const htmlTemplate = readFileSync(`${__dirname}/index.html`, "utf8");
+const clientJs = readFileSync(`${__dirname}/client.js`, "utf8");
 
 const pizzas = [
   {
@@ -76,6 +77,9 @@ const server = createServer((req, res) => {
     res.end(html);
   } else if (pathname === "/test") {
     res.end("Test Page");
+  } else if (pathname === "/client.js") {
+    res.writeHead(200, { "Content-Type": "text/javascript" });
+    res.end(clientJs);
   } else {
     res.writeHead(404);
     res.end("Not Found");
